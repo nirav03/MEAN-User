@@ -1,0 +1,102 @@
+<nav class="navbar navbar-dark bg-primary">
+    <a routerLink ="../" class="nav-link">Home</a>
+    <a (click)="logout()" class="nav-link"><i class="material-icons">logout</i></a>   
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+                <div class="form-container">
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="name">Name: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <div class= "form-right">
+                            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name"  class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter your full name" 
+                            required>
+                             <div class="alert alert-danger alert-block" *ngIf="!name.valid && name.touched">
+                             Name is required
+                             </div>
+                        </div>     
+                    </div>      
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="email">Email: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <div class= "form-right">
+                            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
+                             [pattern]="emailPattern" required>
+                            <div class="alert alert-danger alert-block" *ngIf="!email.valid && email.touched">
+                                <div *ngIf="email.errors.required">Email is required</div>
+                                <div *ngIf="email.errors.pattern">Email is not valid</div>
+                                </div>
+                        </div>     
+                    </div> 
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="phone">Contact Number: <sup class="text-danger">*</sup></label>
+                        </div>
+                        <div class= "form-right">
+                            <input type="text" name="phone" #phone="ngModel" [(ngModel)]="user.phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="Enter your mobile number"
+                            [pattern]="phonePattern" required>
+                            <div class="alert alert-danger alert-block" *ngIf="!phone.valid && phone.touched">
+                                <div *ngIf="phone.errors.required">Phone is required</div>
+                                <div *ngIf="phone.errors.pattern">Phone number is not valid</div>
+                                </div>
+                        </div>     
+                    </div>   
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="bday">Birthdate: </label>
+                        </div>
+                        <div class= "form-right">
+                            <div class="input-group">
+                                <input type="date" name="birthdate" #birthdate="ngModel" [(ngModel)]="user.birthdate" class="form-control" id="bday" aria-describedby="birthdayHelp">
+                            </div>
+                        </div>     
+                    </div>   
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="gender">Gender: </label>
+                        </div>
+                        <div class= "form-right">
+                           <div class="radio-block">
+                            <input type="radio" name="gender" #gender="ngModel" [(ngModel)]="user.gender" id="exampleRadios1" value="Male">
+                            <label  for="exampleRadios1">Male </label>                            
+                           </div>
+                           <div class="radio-block">
+                            <input  type="radio" name="gender" #gender="ngModel" [(ngModel)]="user.gender" id="exampleRadios2" value="Female" >
+                            <label  for="exampleRadios2">Female </label>
+                           </div>
+                        </div>     
+                    </div> 
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="state">State: </label>
+                        </div>
+                        <div class= "form-right">
+                                <select class="custom-select" 
+                                    style="width:150px;" name="state" #state="ngModel" [(ngModel)]="user.state"> 
+                                <option>Gujarat</option> 
+                                <option>Maharastra</option> 
+                                <option>Delhi</option> 
+                                </select> 
+                        </div>     
+                    </div>   
+                    <div class="form-group">    
+                        <div class= "form-left">
+                            <label for="address">Address:</label>
+                        </div>
+                        <div class= "form-right">
+                            <textarea rows="3" class="form-control" id="address" aria-describedby="addressHelp" placeholder="Enter your address" name="address" #address="ngModel" [(ngModel)]="user.address"></textarea>
+                        </div>     
+                    </div>         
+                    <div class="button-group">            
+                        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+                        <button type="button" class="btn btn-primary" (click)="resetForm(userForm)" >Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

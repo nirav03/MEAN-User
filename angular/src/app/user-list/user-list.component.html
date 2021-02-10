@@ -1,0 +1,45 @@
+<nav class="navbar navbar-dark bg-primary">
+  <a (click)="logout()" class="nav-link"><i class="material-icons">logout</i></a>   
+</nav>
+<div class="listing-wrap">
+    <h2> User Listing </h2>
+      <div class="listing-table card">
+            <div class="table-header">
+                <input type = "text"  size = 10 placeholder ="Search" [(ngModel)] = "searchText" class="search-block">
+          <h4><a routerLink = "/user/add"><button class="btn btn-primary ">Add</button></a></h4>
+          </div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        
+        <th scope="col" (click) = "sort('name')" class="name-block"><span>Name</span><i class="material-icons">import_export</i></th>
+        <th scope="col">Phone</th>
+        <th scope="col">Birthdate</th>
+        <th scope="col">Gender</th>
+        <th scope="col" (click) = "sort('state')" class="name-block"><span>State</span><i class="material-icons">import_export</i></th>
+        <th scope="col">Action</th>
+  
+  
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of user | filter: searchText| orderBy: key: reverse: true  | paginate: { itemsPerPage: 10, currentPage: p}; let i = index" > 
+        <td> {{ user.name  }} </td>
+        <td> {{ user.phone }} </td>
+        <td> {{ user.birthdate }} </td>
+        <td> {{ user.gender }} </td>
+        <td> {{ user.state }} </td>
+        <td class="td-btn-group">
+          <a routerLink = "/edit/{{user._id}}" class="action-btn" >   
+            <i class="material-icons">edit</i>
+          </a>
+          <a class="btn-list" (click)="onDelete(user._id,userForm)">
+            <i class="material-icons">delete</i>
+          </a>
+        </td> 
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+    <pagination-controls (pageChange)="p=$event" ></pagination-controls>
