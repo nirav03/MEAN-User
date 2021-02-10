@@ -1,0 +1,51 @@
+
+    <div class="container">
+    <div class="card text-center  register-form ">
+        <form #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+            <div class="form-header">
+                <h2>Sign Up </h2>
+            </div>
+            <div class="form-wrap">
+                <div class="form-group">    
+                <div class="row">
+                    <div class= " col-sm-12 col-md-6">
+                    <input placeholder="First Name" type="text" name="firstName" #firstName="ngModel" [(ngModel)]="register.firstName" class="form-control"  aria-describedby="nameHelp" required>
+                    <div class="alert alert-danger alert-block" *ngIf="!firstName.valid && firstName.touched">
+                       First name is required
+                        </div>
+                    </div>
+               
+                    <div class= " col-sm-12 col-md-6">
+                    <input placeholder="Last Name" type="text" name="lastName" #lastName="ngModel" [(ngModel)]="register.lastName" class="form-control"  aria-describedby="nameHelp" required>
+                    <div class="alert alert-danger alert-block" *ngIf="!lastName.valid && lastName.touched">
+                        Last name is required
+                         </div>
+                    </div>     
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input placeholder="Email" type="email" name="email" #email="ngModel" [(ngModel)]="register.email" class="form-control"  aria-describedby="nameHelp" [pattern]="emailPattern" required>
+                        <div class="alert alert-danger alert-block" *ngIf="!email.valid && email.touched">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.pattern">Email is not valid</div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input placeholder="Password" type="password" name="password" #password="ngModel" [(ngModel)]="register.password" class="form-control"  aria-describedby="nameHelp" required>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-block">
+            <button type="submit" [disabled]="!userRegistrationForm.valid" class="btn btn-primary" >Sign Up</button>
+            </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    
